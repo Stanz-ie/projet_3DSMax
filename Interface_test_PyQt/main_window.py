@@ -1,7 +1,7 @@
 import sys
-from ..DB_test_sqlite3 import script_test_db
-
 import sqlite3
+
+import DB_test_sqlite3 as pkg
 
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea, 
