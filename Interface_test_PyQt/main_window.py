@@ -1,7 +1,13 @@
 import sys
+sys.path.append('/home/constance/Documents/ADA/PROJETS_PERSOS/projet_3DSMax/projet_3DSMax_code/DB_test_sqlite3')
+print(sys.path)
 import sqlite3
 
-import DB_test_sqlite3 as pkg
+#import DB_test_sqlite3.script_test_db
+#import DB_test_sqlite3 as pkg
+#from DB_test_sqlite3 import script_test_db
+
+import DB_test_sqlite3.script_test_db
 
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea, 
