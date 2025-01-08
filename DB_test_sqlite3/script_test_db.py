@@ -1,6 +1,6 @@
 import sqlite3
 
-def creer_table():
+def create_table():
     
     connexion = sqlite3.connect("test.db")
 
@@ -8,133 +8,133 @@ def creer_table():
     curseur = connexion.cursor()
 
     query = '''CREATE TABLE IF NOT EXISTS 
-    personnages_arcane(
+    SHOTS(
     id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-    nom TEXT,
-    genre TEXT,
-    ville TEXT,
-    statut TEXT)'''
+    name TEXT NOT NULL,
+    path TEXT NOT NULL,
+    created_at DATETIME default current_timestamp,
+    completed_at DATETIME NOT NULL )'''
 
     # recréer la table à chaque lancement du script
-    curseur.execute("DROP TABLE IF EXISTS personnages_arcane")
+    curseur.execute("DROP TABLE IF EXISTS SHOTS")
 
     curseur.execute(query)
 
     connexion.close()
 
-creer_table()
+create_table()
 
 ######################################
 
 # insérer des données
 
-def inserer_perso(nom, genre, ville, statut):
+def insert_shot(name, path, completed_at):
 
     connexion = sqlite3.connect("test.db")
 
     curseur = connexion.cursor()
 
     query = '''
-    INSERT INTO personnages_arcane
-    (nom, genre, ville, statut)
+    INSERT INTO SHOTS
+    (name, path, completed_at)
     VALUES
-    ( ?, ?, ?, ?)
+    ( ?, ?, ?)
     '''
-    curseur.execute(query, (nom, genre, ville, statut))
+    curseur.execute(query, (name, path, completed_at))
 
     connexion.commit()
 
     connexion.close()
 
-inserer_perso("Vi", "femme", "Zaun", "vivante")
+insert_shot("shot_001", "/path/to/shot_001", "2022-01-01 12:00:00")
 
 ######################################
 
 # insérer un jeu de données
 
-personnages_saison1 = [("Jinx", "femme", "Zaun", "vivante"), 
-    ("Silco", "homme", "Zaun", "mort"), ("Jayce", "homme", "Piltover", "vivant"),
-    ("Mel", "femme", "Noxus", "vivante"), ("Vander", "homme", "Zaun", "mort"),
-    ("Ekko", "homme", "Zaun", "vivant"), ("Caitlyn", "femme", "Piltover", "vivante"),
-    ("Mylo", "homme", "Zaun", "mort"), ("Claggor", "homme", "Zaun", "mort"),
-    ("Cassandra", "femme", "Piltover", "inconnu"), ("Sevika", "femme", "Zaun", "vivante")]
+all_shots = [
+    ('shot_002', '/path/to/shot_002', '2022-01-02 13:00:00'),
+    ('shot_003', '/path/to/shot_003', '2022-01-03 14:00:00'),
+    ('shot_004', '/path/to/shot_004', '2022-01-04 15:00:00'),
+    ('shot_005', '/path/to/shot_005', '2022-01-05 16:00:00'),
+    ('shot_006', '/path/to/shot_006', '2022-01-06 17:00:00'),
+    ('shot_007', '/path/to/shot_007', '2022-01-07 18:00:00'),
+    ('shot_008', '/path/to/shot_008', '2022-01-08 19:00:00'),
+    ('shot_009', '/path/to/shot_009', '2022-01-09 20:00:00'),
+    ('shot_010', '/path/to/shot_010', '2022-01-10 21:00:00'),
+    ('shot_011', '/path/to/shot_011', '2022-01-11 22:00:00'),
+    ('shot_012', '/path/to/shot_012', '2022-01-12 23:00:00'),
+    ('shot_013', '/path/to/shot_013', '2022-01-13 00:00:00'),
+    ('shot_014', '/path/to/shot_014', '2022-01-14 01:00:00'),
+    ('shot_015', '/path/to/shot_015', '2022-01-15 02:00:00'),
+]
 
-def inserer_plusieurs_persos(personnages_saison1):
+
+def insert_all_shots(all_shots):
 
     connexion = sqlite3.connect("test.db")
     curseur = connexion.cursor()
     query = '''
-    INSERT INTO personnages_arcane
-    (nom, genre, ville, statut)
+    INSERT INTO SHOTS
+    (name, path, completed_at)
     VALUES 
-    (?, ?, ?, ?)
+    (?, ?, ?)
     '''
-    curseur.executemany(query, (personnages_saison1))
+    curseur.executemany(query, (all_shots))
 
-# pas besoin d'indiquer l'ID, vu que celle-ci est auto-incrémentée et n'est pas présente dans
-# la liste des tuples au-dessus
+# pas besoin d'indiquer l'ID, vu que celle-ci est auto-incrémentée 
+# et n'est pas présente dans la liste des tuples au-dessus
     connexion.commit()
     connexion.close()
 
-inserer_plusieurs_persos(personnages_saison1)
+insert_all_shots(all_shots)
 
 ######################################
 
-def recup_persos_info (id):
+# récupérer les infos d'un plan par son ID
+
+def get_shot (id):
     connexion = sqlite3.connect("test.db")
     curseur = connexion.cursor()
     query = '''
-    SELECT * FROM personnages_arcane WHERE id = ?
+    SELECT * FROM SHOTS WHERE id = ?
     '''
-    res = curseur.execute(query, (id))
-    perso = res.fetchall()
+    res = curseur.execute(query, (id,))
+    shot = res.fetchall()
     connexion.close()
 
-    return perso
+    return shot
 
-#print (recup_persos_info(7))
+# print (get_shot(7))
 
 ######################################
 
-def mettre_a_jour_perso (nom_update, genre_update, ville_update, statut_update, perso_id):
+def update_shot (shot_id, updated_name, updated_path, updated_completed_date):
     connexion = sqlite3.connect("test.db")
     curseur = connexion.cursor()
     query = '''
-    UPDATE personnages_arcane 
-    SET nom=?, genre=?, ville=?, statut=?
+    UPDATE SHOTS 
+    SET name=?, path=?, completed_at=?
     WHERE id=?
     '''
-    curseur.execute(query, (nom_update, genre_update, ville_update, statut_update, perso_id))
+    curseur.execute(query, (updated_name, updated_path, updated_completed_date, shot_id))
     connexion.commit()
     connexion.close()
 
-mettre_a_jour_perso("Vander", "homme", "Zaun", "mort", 11)
+#update_shot("7", "toto","/path/to/toto", "2022-01-07 18:15:00" )
 
 ######################################
 
-def supprimer_perso (id):
+def delete_shot (id):
     connexion = sqlite3.connect("test.db")
     curseur = connexion.cursor()
     query = '''
-    DELETE FROM personnages_arcane WHERE id = ?
+    DELETE FROM SHOTS WHERE id = ?
     '''
-    curseur.execute(query, (id))
+    curseur.execute(query, (id,))
     connexion.commit()
     connexion.close()
 
-supprimer_perso (id = "9")
+# delete_shot (9)
 
-
-# requêtes d'interrogation - méthodes fetch
-
-# res = curseur.execute("SELECT * FROM personnages_arcane")
-# print(res.fetchall())
-# print (res.fetchone())
-# print (res.fetchone())
-# print (res.fetchmany(4))
-
-# requête d'interrogation préparées
-
-# res = curseur.execute("SELECT * FROM personnages_arcane WHERE ville = ?", ('Zaun',))
-# print (res.fetchall())
   
