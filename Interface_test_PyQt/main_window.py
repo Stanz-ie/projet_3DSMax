@@ -9,31 +9,27 @@ QLineEdit, QHBoxLayout, QFrame, QPushButton, QLabel)
 from datetime import datetime
 
 
-class Main(QMainWindow):
+class MainWindow(QMainWindow):
     
     def __init__(self):
-        # constructeur parent (QMainWindow)
-        super().__init__()
-        # ajout de propriétés
-        self.setWindowTitle("Mon Interface")
+        super().__init__() # constructeur parent (QMainWindow)
+        self.setWindowTitle("Mon Interface") # ajout de propriétés
         #self.setMaximumSize(500, 400)
         create_table()
     
 def main():
-    app = QApplication(sys.argv)
+    app = QApplication(sys.argv) # On crée l'instance d'application
+    # possible de créer l'instance sans liste d'arguments (si on sait qu'on
+    # utilisera pas le terminal pour controler QT
+    # dans ce cas, juste créer une liste vide app = QApplication([]) 
     app.setStyle('fusion')
-    win = Main()
-    win.show()
-    app.exec_()
+    win = MainWindow()
+    win.show() # Afficher la fenêtre (par défaut elle ne l'est pas)
+    app.exec_() # On démarre la boucle de gestion des événements.
 
 if __name__ == "__main__":
     main()
-    # On crée l'instance d'application en lui passant le tableau des arguments.
-    #app = QApplication(sys.argv)
 
-    # Instancier et afficher la fenêtre graphique.
-    #window = main_window()
-    #window.show()
 
-    # On démarre la boucle de gestion des événements.
-    #sys.exit(app.exec_())
+    
+    

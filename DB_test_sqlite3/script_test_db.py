@@ -53,21 +53,23 @@ insert_shot("shot_001", "/path/to/shot_001", "2022-01-01 12:00:00")
 # insérer un jeu de données
 
 all_shots = [
-    ('shot_002', '/path/to/shot_002', '2022-01-02 13:00:00'),
-    ('shot_003', '/path/to/shot_003', '2022-01-03 14:00:00'),
-    ('shot_004', '/path/to/shot_004', '2022-01-04 15:00:00'),
-    ('shot_005', '/path/to/shot_005', '2022-01-05 16:00:00'),
-    ('shot_006', '/path/to/shot_006', '2022-01-06 17:00:00'),
-    ('shot_007', '/path/to/shot_007', '2022-01-07 18:00:00'),
-    ('shot_008', '/path/to/shot_008', '2022-01-08 19:00:00'),
-    ('shot_009', '/path/to/shot_009', '2022-01-09 20:00:00'),
-    ('shot_010', '/path/to/shot_010', '2022-01-10 21:00:00'),
-    ('shot_011', '/path/to/shot_011', '2022-01-11 22:00:00'),
-    ('shot_012', '/path/to/shot_012', '2022-01-12 23:00:00'),
-    ('shot_013', '/path/to/shot_013', '2022-01-13 00:00:00'),
-    ('shot_014', '/path/to/shot_014', '2022-01-14 01:00:00'),
-    ('shot_015', '/path/to/shot_015', '2022-01-15 02:00:00'),
+    ('shot_001_layout_010.max', '/path/to/shot001', '2022-01-01 12:00:00'),
+    ('shot_002_rendering_005.max', '/path/to/shot002', '2022-01-02 12:00:00'),
+    ('shot_003_lighting_012.max', '/path/to/shot003', '2022-01-03 12:00:00'),
+    ('shot_004_layout_002.max', '/path/to/shot004', '2022-01-04 12:00:00'),
+    ('shot_005_rendering_009.max', '/path/to/shot005', '2022-01-05 12:00:00'),
+    ('shot_006_lighting_003.max', '/path/to/shot006', '2022-01-06 12:00:00'),
+    ('shot_007_layout_015.max', '/path/to/shot007', '2022-01-07 12:00:00'),
+    ('shot_008_rendering_008.max', '/path/to/shot008', '2022-01-08 12:00:00'),
+    ('shot_009_lighting_001.max', '/path/to/shot009', '2022-01-09 12:00:00'),
+    ('shot_010_layout_007.max', '/path/to/shot010', '2022-01-10 12:00:00'),
+    ('shot_011_rendering_013.max', '/path/to/shot011', '2022-01-11 12:00:00'),
+    ('shot_012_lighting_006.max', '/path/to/shot012', '2022-01-12 12:00:00'),
+    ('shot_013_layout_014.max', '/path/to/shot013', '2022-01-13 12:00:00'),
+    ('shot_014_rendering_011.max', '/path/to/shot014', '2022-01-14 12:00:00'),
+    ('shot_015_lighting_004.max', '/path/to/shot015', '2022-01-15 12:00:00')
 ]
+
 
 
 def insert_all_shots(all_shots):
