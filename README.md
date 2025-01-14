@@ -4,6 +4,6 @@ L'idée est de développer une interface accessible dans 3DSMax qui permettrait 
 Technologies utilisées :
 - sqlite
 - sqlite3
-- PyQt5
+- PySide2
   
 
