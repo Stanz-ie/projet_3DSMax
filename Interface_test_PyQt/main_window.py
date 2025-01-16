@@ -4,31 +4,76 @@ from DB_test_sqlite3.script_test_db import create_table, insert_shot, insert_all
 
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import (QApplication, QMainWindow, QVBoxLayout, QScrollArea, 
-QLineEdit, QHBoxLayout, QFrame, QPushButton, QLabel)
+QLineEdit, QDateEdit, QHBoxLayout, QFrame, QPushButton, QLabel)
 
 from datetime import datetime
 
+class CreateRecord(QFrame):
+    def __init__(self, main_window):
+        super().__init__()
+        self.date_entry = QDateEdit()
+        self.shot_name = QLineEdit()
+        self.shot_name.setPlaceholderText('Shot name')
+        self.path = QLineEdit()
+        self.path.setPlaceholderText('/path/to/shot')
+        self.add_button = QPushButton(text="Add Shot")
+        # Connecter le bouton à la fonction add_shot
+        self.add_button.clicked.connect(self.add_shot)
+
+        layout = QVBoxLayout(self)
+        layout.addWidget(QLabel('Shot Name:'))
+        layout.addWidget(self.shot_name)
+        layout.addWidget(QLabel('Completed Date:'))
+        layout.addWidget(self.date_entry)
+        layout.addWidget(self.add_button)
+
+    def add_shot(self):
+        shot_name = self.shot_name.text()
+        completed_date = self.date_entry.date().toString("yyyy-MM-dd")
+        path = self.path.text()
+        if shot_name and path:
+            insert_shot(shot_name, completed_date, path)
+            # Recharger la DB après ajout d'un plan
+            #self.main_window.load_collection()
+            # Effacer le champ de saisie
+            self.shot_name.clear()  
+            self.path.clear()
 
 class MainWindow(QMainWindow):
     
     def __init__(self):
-        super().__init__() # constructeur parent (QMainWindow)
-        self.setWindowTitle("Mon Interface") # ajout de propriétés
-        #self.setMaximumSize(500, 400)
+        # constructeur parent (QMainWindow)
+        super().__init__()
+        self.setWindowTitle("Mon Interface")
+        self.resize(600, 500)
         create_table()
     
+    def initUI(self):
+        self.main_frame = QFrame()
+        self.main_layout = QVBoxLayout(self.main_frame)
+    # Create an instance of CreateRecord
+    # Pass a reference to the main window
+        self.register_widget = CreateRecord(self)
+        self.main_layout.addWidget(self.register_widget)
+        self.setCentralWidget(self.main_frame)
+  
+    
 def main():
-    app = QApplication(sys.argv) # On crée l'instance d'application
-    # possible de créer l'instance sans liste d'arguments (si on sait qu'on
-    # utilisera pas le terminal pour controler QT
-    # dans ce cas, juste créer une liste vide app = QApplication([]) 
+    # On crée l'instance d'application
+    # possible de créer l'instance sans liste d'arguments 
+    # si on sait qu'on n'utilisera pas le terminal pour controler QT
+    # dans ce cas, juste créer une liste vide app = QApplication([])
+    app = QApplication([])  
     app.setStyle('fusion')
     win = MainWindow()
-    win.show() # Afficher la fenêtre (par défaut elle ne l'est pas)
-    app.exec_() # On démarre la boucle de gestion des événements.
+    # Afficher la fenêtre (par défaut elle ne l'est pas)
+    win.show()
+    # On démarre la boucle de gestion des événements. 
+    app.exec_()
+    
 
 if __name__ == "__main__":
-    main()
+    main()    
 
 
     
