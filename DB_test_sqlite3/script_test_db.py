@@ -46,14 +46,13 @@ def insert_shot(name, path, completed_at):
 
     connexion.close()
 
-insert_shot("shot_001", "/path/to/shot_001", "2022-01-01 12:00:00")
+insert_shot("shot_001_layout_010.max", "/path/to/shot_001", "2022-01-01 12:00:00")
 
 ######################################
 
 # insérer un jeu de données
 
 all_shots = [
-    ('shot_001_layout_010.max', '/path/to/shot001', '2022-01-01 12:00:00'),
     ('shot_002_rendering_005.max', '/path/to/shot002', '2022-01-02 12:00:00'),
     ('shot_003_lighting_012.max', '/path/to/shot003', '2022-01-03 12:00:00'),
     ('shot_004_layout_002.max', '/path/to/shot004', '2022-01-04 12:00:00'),

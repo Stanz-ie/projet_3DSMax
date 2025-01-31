@@ -15,8 +15,8 @@ class MainWindow(QMainWindow):
         # constructeur parent (QMainWindow)
         super().__init__()
        
-        self.setWindowTitle("Mon Interface")
-        self.setFixedSize(700, 600)
+        self.setWindowTitle("Mon Interface POC")
+        self.setFixedSize(400, 300)
 
         central_area = QWidget()
         self.setCentralWidget(central_area)
@@ -45,11 +45,12 @@ class MainWindow(QMainWindow):
         central_area.setLayout(layout)
 
         create_table()
+        
 
     def add_shot(self):
         shot_name = self.shot_name.text()
-        completed_date = self.date_entry.date().toString("yyyy-MM-dd")
         path = self.path.text()
+        completed_date = self.date_entry.date().toString("yyyy-MM-dd")
         if shot_name and path:
             insert_shot(shot_name, completed_date, path)
             # Recharger la DB après ajout d'un plan
@@ -68,17 +69,6 @@ win.show()
 # On démarre la boucle de gestion des événements. 
 app.exec_()
 
-
-'''
-def initUI(self):
-        self.main_frame = QFrame()
-        self.main_layout = QVBoxLayout(self.main_frame)
-    # Create an instance of CreateRecord
-    # Pass a reference to the main window
-        self.register_widget = CreateRecord(self)
-        self.main_layout.addWidget(self.register_widget)
-        self.setCentralWidget(self.main_frame)
-'''
     
 
     
