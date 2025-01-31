@@ -71,7 +71,6 @@ all_shots = [
 ]
 
 
-
 def insert_all_shots(all_shots):
 
     connexion = sqlite3.connect("test.db")
