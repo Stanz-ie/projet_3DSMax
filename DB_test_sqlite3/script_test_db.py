@@ -45,27 +45,27 @@ def insert_shot(name, path):
 
     connexion.close()
 
-insert_shot("shot_001_layout_010.max", "/path/to/shot_001", "2022-01-01 12:00:00")
+insert_shot("shot_001_layout_010.max", "/path/to/shot_001_layout_010.max")
 
 ######################################
 
 # insérer un jeu de données
 
 all_shots = [
-    ('shot_002_rendering_005.max', '/path/to/shot002', '2022-01-02 12:00:00'),
-    ('shot_003_lighting_012.max', '/path/to/shot003', '2022-01-03 12:00:00'),
-    ('shot_004_layout_002.max', '/path/to/shot004', '2022-01-04 12:00:00'),
-    ('shot_005_rendering_009.max', '/path/to/shot005', '2022-01-05 12:00:00'),
-    ('shot_006_lighting_003.max', '/path/to/shot006', '2022-01-06 12:00:00'),
-    ('shot_007_layout_015.max', '/path/to/shot007', '2022-01-07 12:00:00'),
-    ('shot_008_rendering_008.max', '/path/to/shot008', '2022-01-08 12:00:00'),
-    ('shot_009_lighting_001.max', '/path/to/shot009', '2022-01-09 12:00:00'),
-    ('shot_010_layout_007.max', '/path/to/shot010', '2022-01-10 12:00:00'),
-    ('shot_011_rendering_013.max', '/path/to/shot011', '2022-01-11 12:00:00'),
-    ('shot_012_lighting_006.max', '/path/to/shot012', '2022-01-12 12:00:00'),
-    ('shot_013_layout_014.max', '/path/to/shot013', '2022-01-13 12:00:00'),
-    ('shot_014_rendering_011.max', '/path/to/shot014', '2022-01-14 12:00:00'),
-    ('shot_015_lighting_004.max', '/path/to/shot015', '2022-01-15 12:00:00')
+    ('shot_002_rendering_005.max', '/path/to/shot002_rendering_005.max'),
+    ('shot_003_lighting_012.max', '/path/to/shot003_lighting_012.max'),
+    ('shot_004_layout_002.max', '/path/to/shot004_layout_002.max'),
+    ('shot_005_rendering_009.max', '/path/to/shot005_rendering_009.max'),
+    ('shot_006_lighting_003.max', '/path/to/shot006_lighting_003.max'),
+    ('shot_007_layout_015.max', '/path/to/shot007_layout_015.max'),
+    ('shot_008_rendering_008.max', '/path/to/shot008_rendering_008.max'),
+    ('shot_009_lighting_001.max', '/path/to/shot009_lighting_001.max'),
+    ('shot_010_layout_007.max', '/path/to/shot010_layout_007.max'),
+    ('shot_011_rendering_013.max', '/path/to/shot011_rendering_013.max'),
+    ('shot_012_lighting_006.max', '/path/to/shot012_lighting_006.max'),
+    ('shot_013_layout_014.max', '/path/to/shot013_layout_014.max'),
+    ('shot_014_rendering_011.max', '/path/to/shot014_rendering_011.max'),
+    ('shot_015_lighting_004.max', '/path/to/shot015_lighting_004.max')
 ]
 
 

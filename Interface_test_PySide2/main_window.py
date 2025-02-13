@@ -7,7 +7,6 @@ from PySide2.QtWidgets import (QApplication, QMainWindow, QWidget,
                                QVBoxLayout, QScrollArea, 
                                QLineEdit, QDateEdit, 
                                QFormLayout, QPushButton, QLabel)
-from datetime import datetime
 
 class MainWindow(QMainWindow):
     
@@ -24,7 +23,7 @@ class MainWindow(QMainWindow):
         self.shot_name = QLineEdit()
         self.shot_name.setPlaceholderText('shot_001_layout_010.max')
         self.path = QLineEdit()
-        self.path.setPlaceholderText('/path/to/shot')
+        self.path.setPlaceholderText('/path/to/shot_001_layout_010.max')
         self.date_entry = QDateEdit()
         self.add_button = QPushButton(text="Ajouter shot")
 
@@ -37,7 +36,6 @@ class MainWindow(QMainWindow):
         form_layout = QFormLayout()
         form_layout.addRow('Nom du shot', self.shot_name)
         form_layout.addRow('Chemin du shot', self.path)
-        form_layout.addRow('Date de création', self.date_entry)
 
         layout = QVBoxLayout()
         layout.addLayout(form_layout)
@@ -50,9 +48,8 @@ class MainWindow(QMainWindow):
     def add_shot(self):
         shot_name = self.shot_name.text()
         path = self.path.text()
-        completed_date = self.date_entry.date().toString("yyyy-MM-dd")
         if shot_name and path:
-            insert_shot(shot_name, completed_date, path)
+            insert_shot(shot_name, path)
             # Recharger la DB après ajout d'un plan
             #self.main_window.load_collection()
             # Effacer le champ de saisie
