@@ -12,8 +12,7 @@ def create_table():
     id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
     name TEXT NOT NULL,
     path TEXT NOT NULL,
-    created_at DATETIME default current_timestamp,
-    completed_at DATETIME NOT NULL )'''
+    created_at DATETIME default current_timestamp)'''
 
     # recréer la table à chaque lancement du script
     curseur.execute("DROP TABLE IF EXISTS SHOTS")
@@ -28,7 +27,7 @@ create_table()
 
 # insérer des données
 
-def insert_shot(name, path, completed_at):
+def insert_shot(name, path):
 
     connexion = sqlite3.connect("test.db")
 
@@ -36,11 +35,11 @@ def insert_shot(name, path, completed_at):
 
     query = '''
     INSERT INTO SHOTS
-    (name, path, completed_at)
+    (name, path)
     VALUES
-    ( ?, ?, ?)
+    ( ?, ?)
     '''
-    curseur.execute(query, (name, path, completed_at))
+    curseur.execute(query, (name, path))
 
     connexion.commit()
 
@@ -76,9 +75,9 @@ def insert_all_shots(all_shots):
     curseur = connexion.cursor()
     query = '''
     INSERT INTO SHOTS
-    (name, path, completed_at)
+    (name, path)
     VALUES 
-    (?, ?, ?)
+    (?, ?)
     '''
     curseur.executemany(query, (all_shots))
 
@@ -109,15 +108,15 @@ def get_shot (id):
 
 ######################################
 
-def update_shot (shot_id, updated_name, updated_path, updated_completed_date):
+def update_shot (shot_id, updated_name, updated_path):
     connexion = sqlite3.connect("test.db")
     curseur = connexion.cursor()
     query = '''
     UPDATE SHOTS 
-    SET name=?, path=?, completed_at=?
+    SET name=?, path=?
     WHERE id=?
     '''
-    curseur.execute(query, (updated_name, updated_path, updated_completed_date, shot_id))
+    curseur.execute(query, (updated_name, updated_path, shot_id))
     connexion.commit()
     connexion.close()
 
