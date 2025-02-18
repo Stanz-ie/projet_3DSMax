@@ -68,25 +68,29 @@ all_shots = [
     ('shot_015_lighting_004.max', '/path/to/shot015_lighting_004.max')
 ]
 
-
+'''
 def insert_all_shots(all_shots):
 
     connexion = sqlite3.connect("test.db")
     curseur = connexion.cursor()
-    query = '''
+    query = 
     INSERT INTO SHOTS
     (name, path)
     VALUES 
     (?, ?)
-    '''
+    
     curseur.executemany(query, (all_shots))
 
-# pas besoin d'indiquer l'ID, vu que celle-ci est auto-incrémentée 
+    # pas besoin d'indiquer l'ID, vu que celle-ci est auto-incrémentée 
 # et n'est pas présente dans la liste des tuples au-dessus
     connexion.commit()
     connexion.close()
 
 insert_all_shots(all_shots)
+'''
+
+
+
 
 ######################################
 
@@ -124,13 +128,14 @@ def update_shot (shot_id, updated_name, updated_path):
 
 ######################################
 
-def delete_shot (id):
+def delete_shot (name, path):
     connexion = sqlite3.connect("test.db")
     curseur = connexion.cursor()
     query = '''
-    DELETE FROM SHOTS WHERE id = ?
+    DELETE FROM SHOTS 
+    WHERE name=? AND path=?
     '''
-    curseur.execute(query, (id,))
+    curseur.execute(query, (name, path))
     connexion.commit()
     connexion.close()
 

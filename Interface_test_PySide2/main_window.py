@@ -1,6 +1,6 @@
 import sys
 sys.path.append('/home/constance/Documents/ADA/PROJETS_PERSOS/projet_3DSMax/projet_3DSMax_code')
-from DB_test_sqlite3.script_test_db import create_table, insert_shot, insert_all_shots, update_shot, delete_shot
+from DB_test_sqlite3.script_test_db import create_table, insert_shot, update_shot, delete_shot
 
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import (QApplication, QMainWindow, QWidget, 
@@ -25,10 +25,12 @@ class MainWindow(QMainWindow):
         self.path = QLineEdit()
         self.path.setPlaceholderText('/path/to/shot_001_layout_010.max')
         self.date_entry = QDateEdit()
-        self.add_button = QPushButton(text="Ajouter shot")
+        self.add_button1 = QPushButton(text="Ajouter shot")
+        self.add_button2 = QPushButton(text="Supprimer shot")
 
         # Connecter le bouton à la fonction add_shot
-        self.add_button.clicked.connect(self.add_shot)
+        self.add_button1.clicked.connect(self.add_shot)
+        self.add_button2.clicked.connect(self.delete_shot)
 
         central_area = QWidget()
         self.setCentralWidget(central_area)
@@ -39,7 +41,8 @@ class MainWindow(QMainWindow):
 
         layout = QVBoxLayout()
         layout.addLayout(form_layout)
-        layout.addWidget(self.add_button)
+        layout.addWidget(self.add_button1)
+        layout.addWidget(self.add_button2)
         central_area.setLayout(layout)
 
         create_table()
@@ -55,6 +58,20 @@ class MainWindow(QMainWindow):
             # Effacer le champ de saisie
             self.shot_name.clear()  
             self.path.clear()
+
+    def delete_shot(self):
+        shot_name = self.shot_name.text()
+        path = self.path.text()
+        if shot_name and path:
+            delete_shot(shot_name, path)
+            # Recharger la DB après ajout d'un plan
+            #self.main_window.load_collection()
+            # Effacer le champ de saisie
+            self.shot_name.clear()  
+            self.path.clear()
+    
+    
+    
 
 # si on sait qu'on n'utilisera pas le terminal pour controler QT
 # dans ce cas, juste créer une liste vide app = QApplication([])
