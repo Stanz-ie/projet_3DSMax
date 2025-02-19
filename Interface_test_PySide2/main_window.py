@@ -1,5 +1,6 @@
+import re
 import sys
-sys.path.append('/home/constance/Documents/ADA/PROJETS_PERSOS/projet_3DSMax/projet_3DSMax_code')
+sys.path.append('/home/constance/Documents/DEV/PROJETS_PERSOS/projet_3DSMax/projet_3DSMax_code')
 from DB_test_sqlite3.script_test_db import create_table, insert_shot, update_shot, delete_shot
 
 from PySide2.QtCore import Qt
@@ -47,32 +48,39 @@ class MainWindow(QMainWindow):
 
         create_table()
         
-
     def add_shot(self):
         shot_name = self.shot_name.text()
+        pattern_shot_name = re.compile(r'^shot_\d{3}_(layout|lighting|rendering)_\d{3}.max$')
+        
+        if not pattern_shot_name.match(shot_name):
+            print('Nom de shot invalide')
+            return # on sort de la fonction
+      
         path = self.path.text()
-        if shot_name and path:
-            insert_shot(shot_name, path)
-            # Recharger la DB après ajout d'un plan
-            #self.main_window.load_collection()
-            # Effacer le champ de saisie
+        pattern_path_name = re.compile(r'^/path/to/shot_\d{3}_(layout|lighting|rendering)_\d{3}.max$')
+        
+        if not pattern_path_name.match(path):
+            print('Chemin de shot invalide')
+            return
+
+        try:
+            if shot_name and path:
+                insert_shot(shot_name, path)
             self.shot_name.clear()  
             self.path.clear()
+            print('Shot ajouté')
+        except:
+            print('Erreur lors de l\'ajout du shot')
 
     def delete_shot(self):
         shot_name = self.shot_name.text()
         path = self.path.text()
         if shot_name and path:
             delete_shot(shot_name, path)
-            # Recharger la DB après ajout d'un plan
-            #self.main_window.load_collection()
-            # Effacer le champ de saisie
             self.shot_name.clear()  
             self.path.clear()
     
     
-    
-
 # si on sait qu'on n'utilisera pas le terminal pour controler QT
 # dans ce cas, juste créer une liste vide app = QApplication([])
 app = QApplication(sys.argv)  
