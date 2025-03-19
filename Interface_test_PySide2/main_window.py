@@ -29,7 +29,7 @@ class MainWindow(QMainWindow):
         self.add_button1 = QPushButton(text="Ajouter shot")
         self.add_button2 = QPushButton(text="Supprimer shot")
 
-        # Connecter le bouton à la fonction add_shot
+        # Connecter le bouton à la fonction add_shot ou delete_shot
         self.add_button1.clicked.connect(self.add_shot)
         self.add_button2.clicked.connect(self.delete_shot)
 
