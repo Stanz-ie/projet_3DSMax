@@ -1,1 +1,24 @@
-.venv
+# Environnements virtuels
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Fichiers de configuration locaux
+*.env
+*.log
+
+# Dossiers spécifiques à l'IDE
+.vscode/
+.idea/
+
+# Fichiers temporaires ou de sauvegarde
+*.swp
+*.bak
+*.tmp
+
+# Fichiers spécifiques à macOS
+.DS_Store
+
+# Base de données SQLite
+*.db

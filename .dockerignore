@@ -1,0 +1,29 @@
+# Ignorer les environnements virtuels
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Fichiers de configuration locaux
+*.env
+*.log
+
+# Dossiers spécifiques à l'IDE
+.vscode/
+.idea/
+
+# Fichiers spécifiques à macOS
+.DS_Store
+
+# Fichiers de contrôle de version
+.git/
+.gitignore
+
+# Fichiers temporaires ou de sauvegarde
+*.swp
+*.bak
+*.tmp
+
+
+# Base de données SQLite (si elle est générée dynamiquement)
+*.db
